@@ -1,0 +1,2 @@
+
+    int size=a.size();
