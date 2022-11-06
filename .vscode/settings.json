@@ -1,8 +1,10 @@
 {
     "files.associations": {
+        "*.ejs": "html",
         "ostream": "cpp",
         "iostream": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "new": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled",
     "editor.fontSize": 15

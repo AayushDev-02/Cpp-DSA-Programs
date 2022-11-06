@@ -35,7 +35,7 @@ vector<vector<int>> permute(string& str) {
     int index = 0;
         
     solve(str, index, ans );
-
+    
     return ans;
 }
 
