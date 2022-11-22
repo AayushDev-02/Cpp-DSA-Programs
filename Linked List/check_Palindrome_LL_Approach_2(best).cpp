@@ -30,7 +30,7 @@ struct Node {
 */
 
 class Solution{
-    private:
+    private:  
     Node* getMid(Node* head ) {
         Node* slow = head;
         Node* fast = head -> next;
