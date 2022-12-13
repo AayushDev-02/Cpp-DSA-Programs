@@ -87,6 +87,7 @@ pair<bool , int> isSumTreeFast(Node* root){
         return ans;
     } 
     
+// O(N) complexity approach -------------------------------------------------------------------
     
     bool isSumTree2(Node* root)
     {
