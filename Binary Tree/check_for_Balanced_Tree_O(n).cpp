@@ -1,21 +1,31 @@
+
 //{ Driver Code Starts
+//Initial Template for C++
+
+
 #include <bits/stdc++.h>
 using namespace std;
 
-/* A binary tree node has data, pointer to left child
-   and a pointer to right child */
+
+// Tree Node
 struct Node {
     int data;
-    struct Node* left;
-    struct Node* right;
+    Node* left;
+    Node* right;
 };
+
+// Utility function to create a new Tree Node
 Node* newNode(int val) {
     Node* temp = new Node;
     temp->data = val;
     temp->left = NULL;
     temp->right = NULL;
+
     return temp;
 }
+
+
+// Function to Build Tree
 Node* buildTree(string str) {
     // Corner Case
     if (str.length() == 0 || str[0] == 'N') return NULL;
@@ -77,69 +87,80 @@ Node* buildTree(string str) {
 
 
 // } Driver Code Ends
-/* Tree node structure  used in the program
+/* A binary tree node structure
 
 struct Node
 {
     int data;
     struct Node* left;
     struct Node* right;
-
+    
     Node(int x){
         data = x;
         left = right = NULL;
     }
-}; */
-// -------------------------------------------- MAIN ANSWER ----------------------------------------------------------------
-class Solution {
-  public:
-  
+};
+ */
+
+class Solution{
+    public:
     
-    pair<int, int> diameterFast (Node* root){
-        
+    pair<bool, int> isBalancedFast(Node* root){
         if(root == NULL){
-            pair<int, int> p = make_pair(0,0);
+            pair<bool, int> p = make_pair(true,0);
             return p;
         }
         
-        pair<int, int> left = diameterFast(root->left);
-        pair<int, int> right = diameterFast(root->right);
+        pair<int,int> left = isBalancedFast(root->left);
+        pair<int,int> right = isBalancedFast(root->right);
         
-        int op1 = left.first;
-        int op2 = right.first;
+        bool leftAns = left.first;
+        bool rightAns = right.first;
         
-        int op3 = left.second + right.second + 1;
+        bool diff = abs(left.second - right.second) <= 1;
         
-        pair<int,int> ans;
-        ans.first = max(op1, max(op2, op3));
+        pair<bool,int> ans;
         ans.second = max(left.second, right.second) + 1;
         
+        if(leftAns && rightAns && diff  ){
+            ans.first = true;
+        }
+        else{
+            ans.first = false;
+        }
+        
         return ans;
-    }    
-  
-  
-    // Function to return the diameter of a Binary Tree.
-    int diameter(Node* root) {
         
-        return diameterFast(root).first;
-        
+    }
+    
+    
+    //Function to check whether a binary tree is balanced or not.
+    bool isBalanced(Node *root)
+    {
+        return isBalancedFast(root).first;
         
     }
 };
-// -------------------------------------------- MAIN ANSWER ----------------------------------------------------------------
+
 
 //{ Driver Code Starts.
 
 /* Driver program to test size function*/
+
+  
+
 int main() {
+
+   
     int t;
-    scanf("%d\n", &t);
+    scanf("%d ", &t);
     while (t--) {
-        string s;
+        string s, ch;
         getline(cin, s);
+        
         Node* root = buildTree(s);
         Solution ob;
-        cout << ob.diameter(root) << endl;
+        cout << ob.isBalanced(root) << endl;
     }
     return 0;
 }
