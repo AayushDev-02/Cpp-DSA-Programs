@@ -1,4 +1,6 @@
-Node* solve(int pre[], int min, int max, int &i, int size){
+
+
+    Node* solve(int pre[], int min, int max, int &i, int size){
         if(i>=size){
             return NULL;
         }   
