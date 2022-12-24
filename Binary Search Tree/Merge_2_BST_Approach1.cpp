@@ -60,8 +60,10 @@ TreeNode<int> *mergeBST(TreeNode<int> *root1, TreeNode<int> *root2){
        solve(root1, bst1);
        solve(root2, bst2);
        
+    //    STEP 2: merge both sorted arrays
        vector<int> mergedArray = mergeArrays(bst1,bst2);
        
+    //    STEP 3: use merged inorder array to build BST
        int start = 0;
        int end = mergedArray.size()-1;
 
