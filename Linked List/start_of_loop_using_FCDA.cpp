@@ -60,7 +60,7 @@ Node* floydDetection(Node* head){
 
         return NULL;
 
-// Aayush
+// Aayush Yadav
 }
 
 
