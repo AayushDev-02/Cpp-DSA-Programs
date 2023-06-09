@@ -14,7 +14,7 @@ void solve(TreeNode<int>* root, vector<int> &arr){
         int i =0;
         int j = 0;
         int k = 0;
-        while(i<a.size() && j<b.size()){
+        while(i<a.size() || j<b.size()){
             if(a[i] < b[j]){
                 ans[k++] = a[i];
                 i++;
@@ -52,7 +52,7 @@ void solve(TreeNode<int>* root, vector<int> &arr){
         return root;
         
     }
-TreeNode<int> *mergeBST(TreeNode<int> *root1, TreeNode<int> *root2){
+    TreeNode<int> *mergeBST(TreeNode<int> *root1, TreeNode<int> *root2){
     // STEP 1 : store inorder 
        vector<int> bst1;
        vector<int> bst2;
