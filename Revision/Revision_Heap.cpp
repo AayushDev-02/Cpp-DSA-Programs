@@ -31,7 +31,7 @@ class Heap{
             }
         }
 
-        void delete(){
+        void deleteNode(){
             // we always delete the root node - top node
             // thus 
             //step 1: swap the last element and the root element ;
@@ -63,14 +63,70 @@ class Heap{
                 else{
                     swap(arr[index], arr[largest]);
                     index = largest;
-                }
-                
+                }   
             }
-
-
         }
 
 };
+
+//Heapify function
+
+void heapify(int arr[], int size, int i){
+    int index = i;
+
+    int left = 2*i;
+    int right = 2*i+1;
+
+    int largest = index;
+
+    if(left <= size && arr[largest] < arr[left]){
+        largest = left;
+    }
+
+    if(right <= size && arr[largest] < arr[right]){
+        largest = right;
+    }
+
+    if(largest != index){
+        swap(arr[index], arr[largest]);
+        index = largest;
+        heapify(arr, size, index);
+    }
+
+}
+
+//building a heap
+void buildHeap(int arr[], int n){
+
+    // only heapifying the non leaf nodes
+    for(int i = n/2; i>0; i--){
+        heapify(arr, n, i);
+    }
+
+
+}
+
+//heap sort
+void heapSort(int arr[], int n){
+    
+    //base case : process tab tak karna h jab tak single element na bache
+    // int index = n;
+
+    while(n != 1){
+        //step 1: swap the root element and the last element
+        swap(arr[1], arr[n]);
+        // index--;    
+        
+        //step 2: size ko kam kar do - right part is sorted and left is not
+        n--;
+
+        //step 3 :root element ko uski sahi jagah par le jao
+        heapify(arr, n , 1);
+    }
+   
+    
+
+}
 
 
 int main(){
@@ -83,20 +139,20 @@ int main(){
     // h.arr[4] = 40;
     // h.arr[5] = 45;
 
-    h.insert(50);
-    h.insert(30);
-    h.insert(70);
-    h.insert(40);
-    h.insert(80);
-    h.insert(100);
+    // h.insert(50);
+    // h.insert(30);
+    // h.insert(70);
+    // h.insert(40);
+    // h.insert(80);
+    // h.insert(100);
 
-    // h.size = 6;
-    cout << "Printing the heap" << endl;
-    for(int i=0; i<=h.size; i++){
-        cout << h.arr[i] <<  " ";
-    }
+    // // h.size = 6;
+    // cout << "Printing the heap" << endl;
+    // for(int i=0; i<=h.size; i++){
+    //     cout << h.arr[i] <<  " ";
+    // }
 
-    cout << endl; 
+    // cout << endl; 
 
     //inserting a new element 
     // h.insert(110);
@@ -104,7 +160,24 @@ int main(){
     // for(int i=0; i<=h.size; i++){
     //     cout << h.arr[i] <<  " ";
     // }
+
+    int arr[] = {-1,12,15,13,11,14};
+    int n = 5;
+    buildHeap(arr, n);
+
+    cout << "printing the heap: " << endl;
+    for(int i=0; i<=n; i++){
+        cout << arr[i] << " ";
+    }
+
+    cout << endl;
+
+    heapSort(arr, n);
     
+    cout << "printing the heap: " << endl;
+    for(int i=0; i<=n; i++){
+        cout << arr[i] << " ";
+    }
 
     return 0;
 }
