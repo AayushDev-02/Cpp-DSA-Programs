@@ -15,7 +15,7 @@ class Heap{
             //step 1: insert value at end
             size=size+1;     // 0 pe insert nhi karte , we start from 1
             int index = size;
-            arr[index] = size;
+            arr[index] = val;
 
             //step 2: value ko sahi position pe le jao
             while(index > 1)        // 1 se chalu hota h so 1 aur 0 nhi le sakte because 0 to defined hi nhi h aur 1 liya to uska parent 0 aayega 
