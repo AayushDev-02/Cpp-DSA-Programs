@@ -30,6 +30,46 @@ class Heap{
                 }
             }
         }
+
+        void delete(){
+            // we always delete the root node - top node
+            // thus 
+            //step 1: swap the last element and the root element ;
+            arr[1] = arr[size];
+
+            //step 2: delete the last node
+            size--;
+
+            //step 3: root ko uski sahi location pe le jao
+            int index = 1;
+            while(index < size){
+                int left = 2*index;
+                int right = 2*index+1;
+
+                int largest = index;
+
+                if(left < size && arr[largest] < arr[left]){
+                    largest = left;
+                }
+
+                if(right < size && arr[largest] < arr[right]){
+                    largest = right;
+                }
+
+                if(largest == index) {
+                    //value is at correct position
+                    break;
+                }
+                else{
+                    swap(arr[index], arr[largest]);
+                    index = largest;
+                }
+                
+            }
+
+
+        }
+
 };
 
 
