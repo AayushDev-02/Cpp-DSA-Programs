@@ -36,14 +36,21 @@ class Heap{
 int main(){
 
     Heap h;
-    h.arr[0] = -1;
-    h.arr[1] = 100;
-    h.arr[2] = 50;
-    h.arr[3] = 60;
-    h.arr[4] = 40;
-    h.arr[5] = 45;
+    // h.arr[0] = -1;
+    // h.arr[1] = 100;
+    // h.arr[2] = 50;
+    // h.arr[3] = 60;
+    // h.arr[4] = 40;
+    // h.arr[5] = 45;
 
-    h.size = 5;
+    h.insert(50);
+    h.insert(30);
+    h.insert(70);
+    h.insert(40);
+    h.insert(80);
+    h.insert(100);
+
+    // h.size = 6;
     cout << "Printing the heap" << endl;
     for(int i=0; i<=h.size; i++){
         cout << h.arr[i] <<  " ";
@@ -52,11 +59,11 @@ int main(){
     cout << endl; 
 
     //inserting a new element 
-    h.insert(110);
+    // h.insert(110);
 
-    for(int i=0; i<=h.size; i++){
-        cout << h.arr[i] <<  " ";
-    }
+    // for(int i=0; i<=h.size; i++){
+    //     cout << h.arr[i] <<  " ";
+    // }
     
 
     return 0;
