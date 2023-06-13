@@ -1,4 +1,5 @@
 #include <iostream>
+#include <queue>
 using namespace std;
 
 class Heap{
@@ -123,8 +124,27 @@ void heapSort(int arr[], int n){
         //step 3 :root element ko uski sahi jagah par le jao
         heapify(arr, n , 1);
     }
-   
     
+}
+
+//kth smallest element
+int getSmallestElement(int arr[], int size, int k){
+
+    priority_queue<int> maxHeap;
+
+    //insert initial k elements of arr
+    for(int i=0; i<k; i++){
+        pq.push(arr[i]);
+    }
+
+    // for remaining elements push only if they are less than top
+    for(int i=k; i<size; i++){
+        int element = arr[i];
+        if(element < maxHeap.top()){
+            maxHeap.pop();
+            maxHeap.push(arr[i]);
+        }
+    }
 
 }
 
