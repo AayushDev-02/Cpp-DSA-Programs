@@ -18,7 +18,7 @@ int signum(int a, int b){
     }
 }
 
-void callMedian2(int &median, priority_queue<int>& maxHeap, priority_queue<int,vector<int>, greater<int>> &minHeap, int element){
+void callMedian2(double &median, priority_queue<int>& maxHeap, priority_queue<int,vector<int>, greater<int>> &minHeap, int element){
 
     switch(signum(maxHeap.size(), minHeap.size())){
 
@@ -44,12 +44,12 @@ void callMedian2(int &median, priority_queue<int>& maxHeap, priority_queue<int,v
                 minHeap.pop();
                 maxHeap.push(topElement);
                 minHeap.push(element);
-                median = (minHeap.top() + maxHeap.top()) / 2;
+                median = (minHeap.top() + maxHeap.top()) / 2.0;
 
             }
             else{                       // CASE 6 - part 2
                 maxHeap.push(element);
-                median = (minHeap.top() + maxHeap.top()) / 2;
+                median = (minHeap.top() + maxHeap.top()) / 2.0;
             }
 
             break;
@@ -59,7 +59,7 @@ void callMedian2(int &median, priority_queue<int>& maxHeap, priority_queue<int,v
             if(element > median){   // CASE 6 - part 1
 
                 minHeap.push(element);
-                median = (minHeap.top() + maxHeap.top()) / 2;
+                median = (minHeap.top() + maxHeap.top()) / 2.0;
 
             }
             else{                   // CASE 6 - part 2
@@ -67,7 +67,7 @@ void callMedian2(int &median, priority_queue<int>& maxHeap, priority_queue<int,v
                 maxHeap.pop();
                 minHeap.push(topElement);
                 maxHeap.push(element);
-                median = (minHeap.top() + maxHeap.top()) / 2;
+                median = (minHeap.top() + maxHeap.top()) / 2.0;
             }
 
             break;
@@ -78,7 +78,7 @@ void callMedian2(int &median, priority_queue<int>& maxHeap, priority_queue<int,v
 
 
 // using if else 
-void callMedian1(int &median, priority_queue<int>& maxHeap, priority_queue<int,vector<int>, greater<int>> &minHeap, int element){
+void callMedian1(double &median, priority_queue<int>& maxHeap, priority_queue<int,vector<int>, greater<int>> &minHeap, int element){
 
     // 3 cases:
 
@@ -106,12 +106,12 @@ void callMedian1(int &median, priority_queue<int>& maxHeap, priority_queue<int,v
             minHeap.pop();
             maxHeap.push(topElement);
             minHeap.push(element);
-            median = (minHeap.top() + maxHeap.top()) / 2;
+            median = (minHeap.top() + maxHeap.top()) / 2.0;
 
         }
         else{                       // CASE 6 - part 2
             maxHeap.push(element);
-            median = (minHeap.top() + maxHeap.top()) / 2;
+            median = (minHeap.top() + maxHeap.top()) / 2.0;
         }
 
     }
@@ -121,7 +121,7 @@ void callMedian1(int &median, priority_queue<int>& maxHeap, priority_queue<int,v
         if(element > median){   // CASE 6 - part 1
 
             minHeap.push(element);
-            median = (minHeap.top() + maxHeap.top()) / 2;
+            median = (minHeap.top() + maxHeap.top()) / 2.0;
 
         }
         else{                   // CASE 6 - part 2
@@ -129,7 +129,7 @@ void callMedian1(int &median, priority_queue<int>& maxHeap, priority_queue<int,v
             maxHeap.pop();
             minHeap.push(topElement);
             maxHeap.push(element);
-            median = (minHeap.top() + maxHeap.top()) / 2;
+            median = (minHeap.top() + maxHeap.top()) / 2.0;
         }
     }
 
@@ -140,7 +140,7 @@ int main(){
     int arr[6] = {5,7,2,9,3,8};
     int n = 6;
 
-    int median = 0;
+    double median = 0;
 
     //max Heap
     priority_queue<int> maxHeap;
