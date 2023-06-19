@@ -66,13 +66,17 @@ bool searchTrie(Node* root, string s){
 
     char ch = s[0];
     int index = ch - 'A';
+    Node* child;
 
-    if(root->children[index]->data == ch){
-        return searchTrie(root->children[index], s.substr(1));
+    //child already present
+    if(root->children[index] != NULL){
+        child = root->children[index];
     }
     else{
         return false;
     }
+
+    return searchTrie(child, s.substr(1));
 
 
 }
@@ -83,6 +87,13 @@ int main(){
     Node* root = new Node('-');
 
     insertWord(root, "CODE");
+    insertWord(root, "CODER");
+    insertWord(root, "CODING");
+    insertWord(root, "CODHELP");
+    insertWord(root, "BABA");
+    insertWord(root, "BABY");
+    insertWord(root, "BABBAR");
+    insertWord(root, "SHONA");
 
     bool ans = searchTrie(root, "CODE");
     if(ans) cout << "Code is present!" << endl;
