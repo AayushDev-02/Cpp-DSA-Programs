@@ -72,13 +72,33 @@ bool searchTrie(Node* root, string s){
     if(root->children[index] != NULL){
         child = root->children[index];
     }
-    else{
+    else{   // not present
         return false;
     }
 
     return searchTrie(child, s.substr(1));
+}
 
+//Deletion in a trie
+void deleteINTrie(Node* root, string s){
+    if(s.length() == 0){
+        root->isTerminal = false;
+        return;
+    }
 
+    char ch = s[0];
+    int index = ch - 'A';
+    Node* child;
+
+    if(root->children[index] != NULL){
+        child = root->children[index];
+    }
+    else{
+        cout << "String is not present in the trie" << endl;
+        return ;
+    }
+
+    deleteINTrie(child, s.substr(1));
 }
 
 int main(){
@@ -95,9 +115,14 @@ int main(){
     insertWord(root, "BABBAR");
     insertWord(root, "SHONA");
 
-    bool ans = searchTrie(root, "CODE");
-    if(ans) cout << "Code is present!" << endl;
-    else cout << "CODE is not present" << endl;
+    bool ans = searchTrie(root, "SHONA");
+    if(ans) cout << "Present" << endl;
+    else cout << "Not Present" << endl;
 
+    deleteINTrie(root, "SHONA");
+
+    ans = searchTrie(root, "SHONA");
+    if(ans) cout << "Present" << endl;
+    else cout << "Not Present" << endl;
 
 }
