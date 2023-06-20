@@ -178,6 +178,7 @@ public:
 
     void findLCP(Node* root, string first, string &ans){
         
+        //yaha mai galti karunga
         if(root->isTerminal) return;
 
         for(int i=0; i<first.length(); i++){
