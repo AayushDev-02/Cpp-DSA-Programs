@@ -23,11 +23,7 @@ void solve(string str, int index, vector<string>& ans){
         
 
     }
-
-
 }
-
-
 
 vector<vector<int>> permute(string& str) {
 
