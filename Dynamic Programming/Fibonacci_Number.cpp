@@ -19,6 +19,7 @@ public:
         return dp[n];
     }
 
+    //THIS IS BOTTOM UP DP APPROACH
     int bottomUpSolve(int n){
         //step 1: create dp array
         vector<int> dp(n+1, -1);
@@ -34,6 +35,27 @@ public:
 
         return dp[n];
     }
+
+    //SPACE OPTIMIZATION METHOD
+    int spaceOptSolve(int n){
+        
+        //we dont need dp array
+        int prev2 = 0;
+        int prev1 = 1;
+        int curr;
+
+        if(n==0) return 0;
+
+        for(int i=2; i<=n; i++){
+            curr = prev1 + prev2;
+            //shifting
+            prev2 = prev1;
+            prev1 = curr;
+        }
+
+        return curr;
+    }
+
 
 
     int fib(int n) {
