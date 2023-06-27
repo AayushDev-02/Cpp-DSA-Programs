@@ -52,6 +52,22 @@ int bottomUpApproach(int n, int k){
     return dp[n];
 }
 
+//space soptimisation
+int spaceOpt(int n, int k){
+
+    int p1 = k;
+    int p2 = ( k + k * (k-1) );
+    int curr;
+    for(int i=3; i<=n; i++){
+        curr = (p2 + p1) * (k-1);
+        p1 = p2;
+        p2 = curr;
+    }
+
+    return p2;
+
+}
+
 int main(){
 
     int n = 4;
@@ -62,7 +78,9 @@ int main(){
     // vector<int> dp(n+1, -1);
     // int ans = topDownApproach(n, k, dp);
 
-    int ans = bottomUpApproach(n,k);
+    // int ans = bottomUpApproach(n,k);
+
+    int ans  = spaceOpt(n,k);
 
     cout << ans << endl;
 
