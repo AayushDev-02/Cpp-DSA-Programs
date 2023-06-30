@@ -82,13 +82,13 @@ int solveTabulation(int weight[], int value[], int n, int capacity){
 
             //include and exclude
             int include = 0;
-            if(weight[index] <= capacity){
+            if(weight[index] <= wt){
                 include = value[index] + dp[index-1][wt - weight[index]];
             }
 
             int exclude = dp[index-1][wt];
  
-            dp[index][capacity] = max(include, exclude);
+            dp[index][wt] = max(include, exclude);
 
 
         }
