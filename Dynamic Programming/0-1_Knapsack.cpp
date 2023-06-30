@@ -66,9 +66,9 @@ int solveMemoization (int weight[], int value[], int index, int capacity, vector
 // TABULATION METHOD
 int solveTabulation(int weight[], int value[], int n, int capacity){
 
-    vector<vector<int>> dp(index+1, vector<int>(capacity+1, 0));
+    vector<vector<int>> dp(n+1, vector<int>(capacity+1, 0));
 
-    for(int w=0; w<=capacity; w++){
+    for(int w=weight[0]; w<=capacity; w++){
         if(weight[0] <= capacity){
             dp[0][w] = value[0];
         }
@@ -77,7 +77,7 @@ int solveTabulation(int weight[], int value[], int n, int capacity){
         }
     }
 
-    for(int index = 0; index< n; index++){
+    for(int index = 1; index< n; index++){
         for(int wt=0; wt <= capacity; wt++){
 
             //include and exclude
@@ -94,7 +94,7 @@ int solveTabulation(int weight[], int value[], int n, int capacity){
         }
     }
     
-    return dp[index][capacity];
+    return dp[n-1][capacity];
 
 }
 
@@ -108,9 +108,10 @@ int main(){
 
     // int ans = solveRec(weight, value, n-1, capacity);
 
-    vector<vector<int>> dp(n+1, vector<int>(capacity+1, -1));
-    int ans = solveMemoization(weight, value, n-1, capacity, dp);
+    // vector<vector<int>> dp(n+1, vector<int>(capacity+1, -1));
+    // int ans = solveMemoization(weight, value, n-1, capacity, dp);
     
+    int ans = solveTabulation(weight, value, n, capacity);
 
 
     cout << "Answer: " << ans;
