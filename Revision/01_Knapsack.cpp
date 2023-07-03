@@ -127,6 +127,36 @@ int spaceOpt(int weight[], int value[], int n, int capacity) {
     return prev[capacity];
 }
 
+int spaceOpt2(int weight[], int value[], int n, int capacity) {
+    
+    vector<int> curr(capacity+1, 0);
+
+    for(int i=weight[0]; i<=capacity; i++){
+        if(weight[0] <= capacity) {
+            curr[i] = value[0];
+        }
+        else{
+            curr[i] = 0;
+        }
+
+        for(int i=1; i<n; i++){
+            //move from right to left
+            for(int j=capacity; j>=0; j--){
+                int include = 0;
+                if(weight[i] <= j){
+                    include = value[i] +  curr[j - weight[i]];
+                }
+
+                int exclude = 0 + curr[j];
+
+                curr[j] = max(include, exclude);
+            }
+        }
+
+    }
+    return curr[capacity];
+}
+
 int main(){
 
     int weight[] = {4,5,1};
@@ -142,7 +172,7 @@ int main(){
 
     // int ans = bottomUp(weight, value, n, capacity);
 
-    int ans = spaceOpt(weight,value,n,capacity);
+    int ans = spaceOpt2(weight,value,n,capacity);
     cout << "Answer: " << ans << endl;
 
 

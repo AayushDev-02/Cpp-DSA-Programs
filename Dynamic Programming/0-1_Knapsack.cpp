@@ -137,6 +137,36 @@ int solveTabulation(int weight[], int value[], int n, int capacity){
     
     }
 
+int spaceOpt2(int weight[], int value[], int n, int capacity) {
+    
+    vector<int> curr(capacity+1, 0);
+
+    for(int i=weight[0]; i<=capacity; i++){
+        if(weight[0] <= capacity) {
+            curr[i] = value[0];
+        }
+        else{
+            curr[i] = 0;
+        }
+
+        for(int index=1; index<n; index++){
+            //move from right to left
+            for(int wt=capacity; wt>=0; wt--){
+                int include = 0;
+                if(weight[index] <= wt){
+                    include = value[index] +  curr[wt - weight[index]];
+                }
+
+                int exclude = 0 + curr[wt];
+
+                curr[wt] = max(include, exclude);
+            }
+        }
+
+    }
+    return curr[capacity];
+}
+
 
 int main(){
 
