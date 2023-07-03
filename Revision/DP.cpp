@@ -68,6 +68,7 @@ int paintingFenceSpaceOpt(int n, int k){
     for(int i=3; i<=n; i++){
         int curr = (prev1 + prev2) * (k-1);
 
+        //shifting -> yaha hi galti karunga
         prev1 = prev2;
         prev2 = curr;
     }
