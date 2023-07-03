@@ -66,7 +66,7 @@ int bottomUp(int weight[], int value[], int n, int capacity) {
     vector<vector<int>> dp(n, vector<int> (capacity+1, 0));
 
     //base case
-    for(int i=0; i<=capaity; i++){
+    for(int i=weight[0]; i<=capacity; i++){
         if(weight[0] <= capacity){
 
             dp[0][i] = value[0];
@@ -76,7 +76,7 @@ int bottomUp(int weight[], int value[], int n, int capacity) {
         }
     }
 
-    for(int i=1; i<=n; i++){
+    for(int i=1; i<n; i++){
         for(int j = 0; j<=capacity; j++){
             int include = 0;
 
@@ -96,6 +96,37 @@ int bottomUp(int weight[], int value[], int n, int capacity) {
 
 }
 
+int spaceOpt(int weight[], int value[], int n, int capacity) {
+    vector<int> prev(capacity+1, 0);
+    vector<int> curr(capacity+1, 0);
+
+    for(int i=weight[0]; i<=capacity; i++){
+        if(weight[0] <= capacity) {
+            prev[i] = value[0];
+        }
+        else{
+            prev[i] = 0;
+        }
+
+        for(int i=1; i<n; i++){
+            for(int j=0; j<=capacity; j++){
+                int include = 0;
+                if(weight[i] <= j){
+                    include = value[i] +  prev[j - weight[i]];
+                }
+
+                int exclude = 0 + prev[j];
+
+                curr[j] = max(include, exclude);
+            }
+            //shifting - yaha galti karunga
+            prev = curr;
+        }
+
+    }
+    return prev[capacity];
+}
+
 int main(){
 
     int weight[] = {4,5,1};
@@ -109,7 +140,9 @@ int main(){
     // vector<vector<int> > dp(n, vector<int> (capacity+1, -1));   //2d array dp
     // int ans =  topDown(weight, value, n-1, capacity, dp);
 
-    int ans = bottomUp(weight, value, n, capacity)
+    // int ans = bottomUp(weight, value, n, capacity);
+
+    int ans = spaceOpt(weight,value,n,capacity);
     cout << "Answer: " << ans << endl;
 
 
