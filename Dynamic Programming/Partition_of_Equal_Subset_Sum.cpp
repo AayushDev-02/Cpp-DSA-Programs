@@ -63,7 +63,7 @@ public:
             dp[i][0] = 1;
         }
 
-        for(int i = n-1; i>=0; i--){
+        for(int i = n; i>=0; i--){
             for(int t = 1; t<=target; t++){
                 bool include = 0;
                 if(t - nums[i] >= 0){
@@ -82,7 +82,39 @@ public:
 
     }
 
+    //Space optimization Approach
+    bool spaceOpt(vector<int> &nums, int target){
+        int n = nums.size();
 
+        //we only need 2 vectors
+        vector<int> curr(target+1, 0);
+        vector<int> next(target+1, 0);
+
+        curr[0] = 1;
+        next[0] = 1;
+
+        for(int i = n-1; i>=0; i--){
+            for(int t = 1; t<=target; t++){
+
+                bool include = 0;
+
+                if(t - nums[i] >= 0){
+                    include = next[t - nums[i]];
+                }
+
+                bool exclude = next[t];
+
+                curr[t] = (include || exclude);
+
+            }
+
+            //shifting
+            next = curr;
+        }
+
+        return curr[target];
+
+    }
 
     bool canPartition(vector<int>& nums) {
         int sum = 0;
@@ -101,7 +133,9 @@ public:
         // vector<vector<int>> dp(n, vector<int> (target+1, -1));
         // bool ans = topDown(nums, index, target, dp);
 
-        bool ans = bottomUp(nums, target );
+        // bool ans = bottomUp(nums, target );
+
+        bool ans = spaceOpt(nums,target);
 
 
         return ans; 
