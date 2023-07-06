@@ -96,7 +96,7 @@ public:
             for(int t = 1; t <= target; t++){
 
                 int ans = 0;
-
+ 
                 for(int i=1; i<=k; i++){
                     if(t - i >= 0){
                         ans = (ans % mod + (prev[ t - i])%mod) %mod;
