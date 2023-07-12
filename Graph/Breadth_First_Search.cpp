@@ -38,9 +38,8 @@ class Graph {
 
 
         //BFS
-        void bfs(T src) {
+        void bfs(T src, unordered_map<T, bool> &visited) {
             queue<T> q;
-            unordered_map<T, bool> visited;
 
             //insert the first node and mark it visited
             q.push(src);
@@ -68,8 +67,8 @@ class Graph {
 
 int main(){
 
-    Graph<int> g;
-
+    Graph<int> g;   
+    int n = 8;  // no of nodes
     g.addEdge(0,1,0);
     g.addEdge(0,2,0);
     g.addEdge(1,3,0);
@@ -80,7 +79,15 @@ int main(){
 
     g.printAdjacencyList();
     cout << endl;
-    g.bfs(0);
+
+    unordered_map<int, bool> visited;
+
+    //run a for loop for all the nodes
+    for(int i=0; i<n; i++){
+        if(!visited[i]){
+            g.bfs(i, visited);
+        }
+    }
 
     return 0;
 }
