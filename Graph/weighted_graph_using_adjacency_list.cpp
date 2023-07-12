@@ -4,19 +4,19 @@ using namespace std;
 
 class Graph {
     public: 
-        unordered_map<int, list<int>> adjList;
+        unordered_map<int, list<pair<int,int>>> adjList;
 
-        void addEdge(int u, int v, bool direction) {
+        void addEdge(int u, int v, int weight, bool direction) {
 
             // if direction = 0 --> undirected graph
             // if direction = 1 --> directed graph
 
             //in both cases u->v edge to banti hi banti h
-            adjList[u].push_back(v);    // create an edge from u to v
+            adjList[u].push_back({v,weight});    // create an edge from u to v
 
             if(direction == 0){
                 //undirected edge
-                adjList[v].push_back(u);  // since edge is undirected v to u edge also exist;
+                adjList[v].push_back({u,weight});  // since edge is undirected v to u edge also exist;
             }
         } 
 
@@ -26,7 +26,7 @@ class Graph {
                 cout << node.first << "-> ";
 
                 for(auto neighbour: node.second){
-                    cout << neighbour << ", ";
+                    cout << " ( " << neighbour.first << " , " << neighbour.second << " ) " << ", ";
                 }
 
                 cout << endl;
@@ -44,9 +44,9 @@ int main() {
     // g.addEdge(0,2,0);
 
     //directed input
-    g.addEdge(0,1,1);
-    g.addEdge(1,2,1);
-    g.addEdge(0,2,1);
+    g.addEdge(0,1,5,1);
+    g.addEdge(1,2,4,1);
+    g.addEdge(0,2,3,1);
 
 
     cout << endl;

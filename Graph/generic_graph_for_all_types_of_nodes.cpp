@@ -1,12 +1,15 @@
 #include <iostream>
-#include <bits/stdc++.h>
+#include <list>
+#include <unordered_map>
+#include <vector>
 using namespace std;
+template <typename T>
 
 class Graph {
     public: 
-        unordered_map<int, list<int>> adjList;
+        unordered_map< T, list<T>> adjList;
 
-        void addEdge(int u, int v, bool direction) {
+        void addEdge(T u, T v, bool direction) { 
 
             // if direction = 0 --> undirected graph
             // if direction = 1 --> directed graph
@@ -37,21 +40,16 @@ class Graph {
 
 int main() {
 
-    Graph g;
-    //undirected edge input
-    // g.addEdge(0,1,0);
-    // g.addEdge(1,2,0);
-    // g.addEdge(0,2,0);
+    //integer type graph
+    // Graph<int> g;
 
-    //directed input
-    g.addEdge(0,1,1);
-    g.addEdge(1,2,1);
-    g.addEdge(0,2,1);
+    //char type graph
+    Graph<char> g1;
 
+    g1.addEdge('a','b', 0);
+    g1.addEdge('b','c', 0);
+    g1.addEdge('a','c', 0);
 
-    cout << endl;
-    g.printAdjacencyList();
+    g1.printAdjacencyList();
 
-
-    return 0;
 }
