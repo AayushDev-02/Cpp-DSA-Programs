@@ -64,19 +64,45 @@ class Graph {
 
         }
 
-        //DFS
-        void dfs (T src, unordered_map<T, bool> &visited) {
-            // print the source 
-            cout << src << ", ";
-            visited[src] = true;
+        bool checkCyclicUsingBFS(T src, unordered_map<T, bool> &visited) {
 
-            //pass a recursive call for all the neighbours
-            for(auto neighbour: adjList[src]){
-                if(!visited[neighbour]){
-                    dfs(neighbour, visited);
+            queue<T> q;
+            //parent
+            unordered_map<T, int> parent;
+
+            //insert the first element in the queue and make it visited also mark its parent as -1;
+            q.push(src);
+            visited[src] = true;
+            parent[src] = -1;
+
+            while(!q.empty()){
+
+                T frontNode = q.front();
+                q.pop();
+
+                for(auto neighbour: adjList[frontNode]){
+                    
+                    if(!visited[neighbour]){
+                        q.push(neighbour);
+                        visited[neighbour] = true;
+                        parent[neighbour] = frontNode;
+                    }
+                    else {
+                        if(parent[frontNode] != neighbour){
+                            //cycle present
+                            return true; 
+                        }
+                       
+                    }
+
                 }
+
             }
+
+            return false;
+
         }
+
 };
 
 int main(){
@@ -84,24 +110,29 @@ int main(){
     Graph<int> g;   
     int n = 5;  // no of nodes
     g.addEdge(0,1,0);
-    g.addEdge(0,3,0);
-    g.addEdge(0,2,0);
-    g.addEdge(2,4,0);
+    g.addEdge(1,2,0);
+    g.addEdge(2,3,0);
+    g.addEdge(3,4,0);
+    g.addEdge(4,0,0);
 
     g.printAdjacencyList();
     cout << endl;
 
     unordered_map<int, bool> visited;
+    bool ans = false;
 
-    //run a for loop for all the nodes
-    //printing dfs traversal
-
-    cout << "Printing DFS Travesal: " << endl;
-    
     for(int i=0; i<n; i++){
         if(!visited[i]){
-            g.dfs(i, visited);
+            ans = g.checkCyclicUsingBFS(i, visited);
+            if(ans == true) break;
         }
+    }
+
+    if(ans == true){
+        cout << "Cycle is present!" << endl;
+    }
+    else{
+        cout << "No cycle found" << endl;
     }
 
     return 0;
