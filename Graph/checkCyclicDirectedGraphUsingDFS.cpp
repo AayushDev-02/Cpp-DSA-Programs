@@ -102,39 +102,59 @@ class Graph {
 
         }
 
+        bool checkCyclicDirectedGraphUsingDFS(T src, unordered_map<int,bool>& visited, unordered_map<int,bool> dfsVisited){
+
+            //mark visited
+            visited[src] = true;
+            dfsVisited[src] = true;
+
+            for(auto neighbour: adjList[src]){
+                
+                if(!visited[neighbour]){
+
+                    bool ans = checkCyclicDirectedGraphUsingDFS(neighbour, visited, dfsVisited);
+                    if (ans == true) return true;
+                }
+
+                if(visited[neighbour] == true && dfsVisited[neighbour] == true){
+                    return true;
+                }
+            }
+
+            //backtracking --yahi pe galti karunga
+            dfsVisited[src] = false;
+
+            return false;
+
+        }
+
 };
 
 int main(){
 
     Graph<int> g;   
     int n = 5;  // no of nodes
-    g.addEdge(0,1,0);
-    // g.addEdge(1,2,0);
-    // g.addEdge(2,3,0);
-    // g.addEdge(3,4,0);
+    g.addEdge(0,1,1);
+    g.addEdge(1,2,1);
+    g.addEdge(2,3,1);
+    g.addEdge(3,4,1);
+    g.addEdge(4,0,1);
 
-
-    g.printAdjacencyList();
-    cout << endl;
-
-    unordered_map<int, bool> visited;
     bool ans = false;
+    unordered_map<int,bool> visited;
+    unordered_map<int,bool> dfsVisited;
 
     for(int i=0; i<n; i++){
         if(!visited[i]){
-            ans = g.checkCyclicUsingDFS(i, visited, -1);
+            ans = g.checkCyclicDirectedGraphUsingDFS(i, visited, dfsVisited);
             if(ans == true) break;
         }
     }
 
-    if(ans == true){
-        cout << "Cycle is present!" << endl;
-    }
-    else{
-        cout << "No cycle found" << endl;
-    }
+    if(ans == true) cout << "Cycle is present" << endl ;
+    else cout << "Cycle is absent" << endl; 
 
-    return 0;
+   
 }
 
 //BFS
