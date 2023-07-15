@@ -54,6 +54,42 @@ public:
         ans.push(src);
     }
 
+    void topologicalSortBFS(int n, vector<int> &ans){
+        queue<int> q;
+        unordered_map<int, int> indegree;
+
+        //sabki indegree calculate kar lo
+        for(auto i: adjList){
+            int src = i.first;
+
+            for(auto nbr: i.second){
+                indegree[nbr]++;
+            }
+        }
+
+        //put all nodes inside queue which has indegeree 0
+        for(int i=0; i<n; i++){
+            if(indegree[i] == 0){
+                q.push(i);
+            }
+        }
+
+        //bfs logic
+        while (!q.empty()){
+            int frontNode = q.front();
+            q.pop();
+
+            ans.push_back(frontNode);
+
+            for(auto nbr: adjList[frontNode]){
+                indegree[nbr]--;
+                //check for 0 again
+                if(indegree[nbr] == 0){
+                    q.push(nbr);
+                }
+            }
+        }
+    }
 
 };
 
@@ -61,28 +97,43 @@ int main(){
 
     Graph<int> g;   
     int n = 8;  // no of nodes
-    g.addEdge(0,1,1);
-    g.addEdge(1,2,1);
-    g.addEdge(2,3,1);
-    g.addEdge(3,4,1);
-    g.addEdge(3,5,1);
+    g.addEdge(2,4,1);
+    g.addEdge(2,5,1);
+    g.addEdge(5,3,1);
     g.addEdge(4,6,1);
-    g.addEdge(5,6,1);
+    g.addEdge(3,7,1);
     g.addEdge(6,7,1);
+    g.addEdge(7,0,1);
+    g.addEdge(7,1,1);
 
     unordered_map<int,bool> visited;
-    stack<int> ans;
+    // stack<int> ans;
 
-    for(int i=0; i<n; i++){
-        if(!visited[i]){
-            g.topologicalSort(i, visited, ans);
-        }
+    // for(int i=0; i<n; i++){
+    //     if(!visited[i]){
+    //         g.topologicalSort(i, visited, ans);
+    //     }
+    // }
+
+    // while(!ans.empty()){
+    //     cout << ans.top() << ", ";
+    //     ans.pop();
+    // }
+
+
+    vector<int> ans;
+
+    //connected or disconnected graph
+    g.topologicalSortBFS(n, ans);
+    
+
+    //printing ans
+    cout << "Printing Topological sort using BFS : " << endl; 
+    for(auto i: ans){
+        cout << i << " ";
     }
 
-    while(!ans.empty()){
-        cout << ans.top() << ", ";
-        ans.pop();
-    }
+    cout << endl;
 
     return 0;
 }
