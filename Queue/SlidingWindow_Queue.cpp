@@ -26,7 +26,7 @@ void solve(int arr[], int n, int k ){
         }
 
         //remove the indexes from queue which are out of window
-        while( (!q.empty()) && (i - q.front() >= k)){
+        if( (!q.empty()) && (i - q.front() >= k)){
             q.pop_front();
         }
 
