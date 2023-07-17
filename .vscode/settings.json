@@ -4,7 +4,12 @@
         "ostream": "cpp",
         "iostream": "cpp",
         "vector": "cpp",
-        "new": "cpp"
+        "new": "cpp",
+        "array": "cpp",
+        "deque": "cpp",
+        "forward_list": "cpp",
+        "list": "cpp",
+        "string_view": "cpp"
     },
     "C_Cpp.errorSquiggles": "Disabled",
     "editor.fontSize": 15
