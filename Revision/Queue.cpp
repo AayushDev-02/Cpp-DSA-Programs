@@ -224,6 +224,34 @@ class Dequeue {
         }
 }
 
+int gasStation (vector<int> &gas, vector<int> &costs){
+
+    int deficit = 0;
+    int balance = 0;
+    int start = 0;
+
+    for(int i=0; i<gas.size(); i++){
+
+        balance = balance + gas[i];
+        int distance = costs[i];
+        balance = balance - distance;
+
+        if(balance > 0){
+            deficit += balance;
+            balance = 0;
+            start = 0;
+        }
+
+    }
+
+    if(balance + deficit >= 0){
+        return start;
+    }
+
+    return -1;
+
+}
+
 
 int main(){
     // //STL
