@@ -31,7 +31,7 @@ int BinarySearch(int arr[], int size, int target) {
 
 }
 
-
+ 
 
 
 int main(){
@@ -51,7 +51,17 @@ int main(){
     }
 
     vector<int> v{1,2,3,4,5,6,7};
+    int arr2[] = {1,2,3,4,5,6,7};
+    int size2 = 7;
     if(binary_search(v.begin(), v.end(), 5)){
+        cout <<  "Found" << endl;
+    }
+    else{
+        cout <<  "Not Found" << endl;
+
+    }
+
+    if(binary_search(arr, arr + size2, 5)){
         cout <<  "Found" << endl;
     }
     else{
